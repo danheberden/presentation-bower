@@ -1,0 +1,95 @@
+<!DoctypE html>
+<html>
+  <link rel="stylesheet" href="components/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="css/sandbox.css">
+  <script src="components/jquery/jquery.js"></script>
+  <script src="js/sandbox.js"></script>
+  <script>
+    (function(window){
+      var smartTrim = function( content ) {
+        // get rid of any whitespace followed by a new line or at the end
+        content = content.replace( /^(\n|[ \t]+\n)/g, '' )
+                          .replace( /(\n[ \t]+|\n)$/g, '' )
+                          .replace( /\t/g, '  ' );
+        var spaces = Infinity,
+            lines = content.split( "\n" ),
+            i = 0,
+            match,
+            rLeadSpace = /^\s+/;
+
+        for ( ; i < lines.length; i++ ) {
+          // get how many spaces prepend this line:
+          match = rLeadSpace.exec( lines[i] );
+          if ( match && match[0] ) {
+            spaces = Math.min( spaces, match[0].length );
+          }
+        }
+        // make a regex like /^    / for how many spaces
+        return content.replace(  new RegExp( '^'+(new Array(spaces+1)).join(' '), 'mg' ) , '' );
+      };
+      window.yasd = function( action ) {
+        if ( action == 'run' ) {
+          // get script tags with type="text/x-code-run" or "text/x-background-run"
+          var scripts = document.getElementsByTagName( 'script' );
+          for ( var i = 0; i < scripts.length; i++ ) {
+            if ( /text\/x-\w+-run/.test( scripts[i].type ) ) {
+              // make a script element
+              var script = document.createElement( 'script' );
+              // put in the codez
+              script.innerHTML = scripts[i].innerHTML;
+              // append that bizniss
+              document.body.appendChild( script );
+            }
+          }
+          document.body.className += "loaded";
+        }
+        // parse code, do any other styles stuffs
+        if ( action == 'init' ) {
+          var scripts = document.getElementsByTagName( 'script' );
+          for ( var i = 0; i < scripts.length; i++ ) {
+            var params = String(scripts[i].type).match(/text\/x-(html|code|shell|shell-output)(-run)?/);
+            if (params) {
+              // make a codemirror element form the script content
+              var value = smartTrim( scripts[i].innerHTML );
+              var mode = "javascript";
+              if (params[1] === "html") {
+                mode = "htmlmixed";
+              }
+              if (params[1] === "shell") {
+                mode = "shell";
+              }
+              
+              var codeMirror = CodeMirror( document.body , {
+                // use the innerHTML, but get rid of any staring linebreaks and prepended whitespace
+                value: value,
+                mode: mode,
+                theme: 'monokai',
+                lineNumbers: params[1] !== "shell",
+                readOnly: true
+              });
+
+            }
+          }
+        }
+        if ( action == 'teardown' ) {
+          document.body.className = "";
+        }
+      }
+
+        var d = window.document, e = d.documentElement, s = d.createElement('style');
+    if (e.style.MozTransform === ''){ // gecko 1.9.1 inference
+     // s.textContent = 'body{visibility:hidden}';
+      s.textContent = 'body{text-indent:-9999px}';
+      e.firstChild.appendChild(s);
+      function f()
+      { 
+      var ffrendertime = setTimeout ( function(){s.parentNode && s.parentNode.removeChild(s)} , 200 ); 
+      }
+      window.addEventListener('load',f,false);
+      setTimeout(f,2000); 
+    }
+
+    })( window );
+  </script>
+  <body></body>
+</html>

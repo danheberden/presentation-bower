@@ -1,0 +1,394 @@
+<!DoctypE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+  <title>Bower</title>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,70" />
+</head>
+<body>
+  
+  <section>
+    <h1>bower</h1>
+    <script type="text/x-code">
+      var speaker = {
+        name:    'Dan Heberden',
+        website: '//danheberden.com',
+        twitter: '@danheberden',
+        worksAt: 'bocoup.com',
+        github:  'danheberden'
+      K
+      };
+    </script>
+  </section>
+
+
+  <section>
+    <script type="text/x-shell">
+      $ bower install jquery
+      bower cloning git://github.com/components/jquery.git
+      bower cached git://github.com/components/jquery.git
+      bower fetching jquery
+      bower checking out jquery#2.0.0
+      bower copying /Users/danheberden/.bower/cache/jquery/29cb...
+
+      bower installing jquery#2.0.0
+    </script>
+  </section>
+
+  <section>
+    <h1>what does getting jQuery look like for you?</h1>
+  </section>
+
+  <section>
+    <ul>
+      <li>going to jquery.com to download?</li>
+      <li>checkout out jQuery and building?</li>
+      <li>remembering the URL and wget'ing it?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>the art of pattern</h2>
+    <ul>
+      <li>easy to install scripts
+      <li>manifest file to express what to download
+      <li>a centralized place for downloaded scripts
+      <li>dependency management
+    </ul>
+  </section>
+
+  <section>
+    <h1>the future</h1>
+    <p>http://github.com/danheberden/yeoman-generator-require-demo</p>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>get yo</h2>
+
+    <script type="text/x-shell">
+      $ npm install -g yo
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>generate</h2>
+
+    <script type="text/x-shell">
+      $ mkdir yahooWeatherApp && cd yahooWeatherApp
+      $ npm install yeoman-generator-requirejs
+      $ yo requirejs
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>running?</h2>
+
+    <script type="text/x-shell">
+      $ grunt preview
+    </script>
+    <p>open http://localhost:8000/index.htm </p>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>wonder if there's a weather plugin?</h2>
+
+    <script type="text/x-shell">
+      $ bower search weather
+
+      jquery-simpleweather git://github.com/monkeecreate/jquery.simpleWeather
+      yahooWeather git://github.com/danheberden/jquery-yahooWeather
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>no cloning, no copying, just ask</h2>
+
+    <script type="text/x-shell">
+      $ bower install yahooWeather --save
+      # --save adds yahooWeather's latest version to the bower.json file
+      # ...
+      bower installing jquery#2.0.0
+      bower installing yahooWeather#0.1.1
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>sprinkle on some html</h2>
+    <script type="text/x-html">
+      <!-- index.html -->
+      <div id="temp"></div>
+      <div id="status"></div>
+      <div id="statusText"></div>
+      <div id="time"></div>
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>sweet, lets use it</h2>
+
+    <script type="text/x-code">
+      // app/main.js
+      require([
+          "jquery", 
+          "components/yahooWeather/yahooWeather.js"
+        ], function($, yahooWeather) {
+
+      });
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>get our current location</h2>
+
+    <script type="text/x-code">
+      // app/main.js in the function block
+
+      // get the location
+      navigator.geolocation.getCurrentPosition(function(locale) {
+        // do something with locale
+      }, function(error) {
+        alert(error.message);
+      });
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>call our required plugin with the latlong</h2>
+
+    <script type="text/x-code">
+      // app/main.js in the geolocation function block
+
+      var position = [locale.coords.latitude, locale.coords.longitude];
+      yahooWeather(position, function(err, weather) {
+        // do something with weather object
+      });
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
+    <h2>update the html</h2>
+
+    <script type="text/x-code">
+      // app/main.js in the yahooWeather block
+
+      $('#temp').html(weather.condition.temp + 'º');
+      $('#status').html(weather.condition.symbols.join(''))
+        .prop('className', weather.condition.symbolLevel);
+      $('#statusText').html(weather.condition.text.toLowerCase());
+      $('#time').html(weather.title);
+    </script>
+  </section>
+
+  <section>
+    <h1>boom done</h1>
+    <img src="https://a248.e.akamai.net/camo.github.com/7c23fd4e521c3f19a01d452372bfe79cb4203f9f/687474703a2f2f64616e686562657264656e2e636f6d2f73686172652f663264322e706e67" />
+  </section>
+
+  <!-- 6 min -->
+
+  <section>
+    <h2>bower.json</h2>
+    <script type="text/x-code">
+      {
+        "name": "my-require-app",
+        "dependencies": {
+          "requirejs": "~2.1.5",
+          "jquery": ">= 1.8.0",
+          "yahooWeather": "~0.1.1"
+        }
+      } 
+    </script>
+  </section>
+
+  <section>
+    <h2>why a client-side package manager</h2>
+  </section>
+
+  <section>
+    <h2>using client-side tools should be easy</h2>
+  </section>
+
+  <section>
+    <script type="text/x-notes">
+      Sure, going to hotscripts.com and finding some script to copy into your project was fun. Ten years ago. It's time to move away from problems like:
+    </script>
+    <p>open/public code being committed into repositories</p>
+    <p>sticking with older, buggy versions because upgrading is a PITA</p>
+    <p>hesitancy to use exiting solutions because of the work to include them</p>
+  </section>
+
+  <section>
+    <h1>bower makes it fun</h1>
+  </section>
+
+  <section>
+    <h2>installation</h2>
+    <script type="text/x-notes">This is the first problem that bower addresses. Instead of hunting down the right 
+    files and dependent tools to download, bower simplifies the work of getting a package 
+    and its dependencies. …and all of its dependencies' dependencices.</script>
+  </section>
+
+  <section>
+    <h2>upgrading</h2>
+    <script type="text/x-notes">
+      Since required packages don't have to be committed into the project, it's 
+      easy to try a new/upgraded version of a plugin.
+    </script>
+  </section>
+    
+  <section>
+    <h2>kick the tires</h2>
+    <script type="text/x-notes">
+      Now you can run your unit tests, run the app, 
+      and kick the tires of your project with this change. If you find 
+      you can upgrade to this new version, you can either use the bower install 
+      jquery#1.9.1 --save feature or edit your bower.json file manually 
+    </script>
+  </section>
+
+  <section>
+    <h2>just a package manager</h2>
+  </section>
+
+  <section>
+    <h4>say what you want, bower gets it</h4>
+    <script type="text/x-notes">
+      There's plenty of great build tools out there, and bower isn't
+      one of them. Bower gets what you need and its dependencies.
+    </script>
+  </section>
+
+  <section>
+    <h4>plays well with others</h4>
+    <script type="text/x-notes">
+      As well as getting all the things, bower exposes that information to you 
+      and your build tool. That way tools like grunt can consume that information 
+      to help you concatenate and minify all of the files bower got with all of 
+      the files you write. 
+    </script>
+  </section>
+
+  <section>
+    <h1>what is a bower?</h1> 
+  </section>
+
+  <section>
+    <img src="https://secure.gravatar.com/avatar/a98244cbdacaf1c0b55499466002f7a8?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+    <img src="https://si0.twimg.com/profile_images/1826201101/297606_10150904890650705_570400704_21211347_1883468370_n.jpeg" />
+    <script type="text/x-notes">
+      the project started at twitter, by @fat and @maccaw. They talked 
+      to other package manager author and had obviously also felt the pangs 
+      of dealing with a lot of client-side libraries. André Cruz was/is the 
+      core developer. Since then the team has expanded, as well as the community 
+      around bower, meaning even more awesome. 
+    </script>
+  </section>
+     
+  <section>
+    <h2>declaring client-side hardship</h2>
+    <ul>
+       <li>managing dependencies
+       <li>sharing components across different code bases
+       <li>reducing the barrier of entry to use a library, to prevent wheel making
+    </ul>
+  </section>
+
+   <section>
+     <h2>but why the bird?</h2>
+   </section>
+
+   <section>
+    <img src="http://paulirish.com/i/824330.png" style="max-height:100%;">
+   </section>
+
+   <section>
+    <img src="http://danheberden.com/share/590f.png">
+   </section>
+
+  <section>
+    <iframe width="853" height="480" src="http://www.youtube.com/embed/E1zmfTr2d4c?start=108" frameborder="0" allowfullscreen></iframe>
+    <blockquote>this grand design is no nest, it's an ultimate seduction parlour</blockquote>
+  </section>
+
+  <section>
+    <h4>so it's like curl, but shortened, ya?</h4>
+  </section>
+
+  <section>
+    <h1>NO</h1>
+  </section>
+
+  <section>
+    <p>bower is a package <em>manager</em> &amp; dependency resolver</p>
+  </section>
+
+  <section>
+    <h2>not just good for you</h2>
+  </section>
+
+  <section>
+    <h4>good for everybody</h4>
+    <p>the difficulty with not having packages maintained leads to all kinds of messes</p>
+  </section>
+
+  <section>
+    <h4>prevents old source code getting commited into projects</h4>
+    <script type="text/x-notes">
+      if you've ever had two versions of jQuery in your project you know exactly what I mean. Your 
+        &lt;script> tags shouldn't be your version control.
+    </script>
+  </section>
+
+  <section>
+    <h4>make updating way easier so it actually happpens</h4>
+  </section>
+
+  <section>
+    <h4>makes incoprorating other tools large and small easy to prevent rewriting them</h4>
+  </section>
+    
+
+  <div id="yasd-slide-marker"></div>
+  <div id="console"></div>
+
+<script>
+  (function(){
+    var verMatch = /jqversion=([\d\w\.]+)/.exec( location.search ),
+        version = verMatch && verMatch[1],
+        src;
+    if ( version ) {
+      src = '//code.jquery.com/jquery-' + version;
+      document.write( '<script src="//' + src + '.js"><\/script>' );
+    }
+  })();
+</script>
+<script>
+  if ( !window.jQuery ) {
+    document.write( '<script src="components/jquery/jquery.min.js"><\/script>' );
+  }
+</script>
+<script src="components/codemirror/lib/codemirror.js"></script>
+<script src="components/codemirror/mode/javascript/javascript.js"></script>
+<script src="components/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="components/codemirror/mode/shell/shell.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/script.js"></script>
+
+</body>
+</html>
