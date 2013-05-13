@@ -79,11 +79,19 @@
 
   <section>
     <p>demo backup copy</p>
+    <h2>get the generator</h2>
+
+    <script type="text/x-shell">
+      $ npm install -g generator-requirejs
+    </script>
+  </section>
+
+  <section>
+    <p>demo backup copy</p>
     <h2>generate</h2>
 
     <script type="text/x-shell">
       $ mkdir yahooWeatherApp && cd yahooWeatherApp
-      $ npm install yeoman-generator-requirejs
       $ yo requirejs
     </script>
   </section>
@@ -206,7 +214,7 @@
     <h2>bower.json</h2>
     <script type="text/x-code">
       {
-        "name": "my-require-app",
+        "name": "yahooWeatherApp",
         "dependencies": {
           "requirejs": "~2.1.5",
           "jquery": ">= 1.8.0",
@@ -357,6 +365,19 @@
 
   <section>
     <h4>make updating way easier so it actually happpens</h4>
+  </section>
+
+  <section>
+    <script type="text/x-shell">
+      $ bower install jquery#1.8.0
+    </script>
+  </section>
+
+  <section>
+    <script type="text/x-shell">
+      $ bower update jquery
+      bower installing jquery#1.8.3
+    </script>
   </section>
 
   <section>

@@ -353,6 +353,8 @@ div.ball.yellow { background: #ebc222; }
 .CodeMirror {
   overflow: none;
   width:120%;
+  height: auto;
+  padding:0.5em 0;
   margin-left:-10%;
   display: -webkit-box; 
   display: -moz-box;
@@ -377,6 +379,10 @@ body.loaded .CodeMirror {
 }
 .CodeMirror textarea {
   display:none;
+}
+.CodeMirror-gutters {
+  background:none;
+  border-right: none;
 }
 section { text-align: center; padding:0em 0.4em; }
 body .cm-s-monokai { color: #F8F8F2; font-size:0.8em; letter-spacing: -0.06em; overflow: hidden;}
