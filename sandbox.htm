@@ -49,23 +49,25 @@
           for ( var i = 0; i < scripts.length; i++ ) {
             var params = String(scripts[i].type).match(/text\/x-(html|code|shell|shell-output)(-run)?/);
             if (params) {
+              // create an element after the script tag
+              var container = $('<div>').insertAfter(scripts[i]).prop('className', scripts[i].className);
               // make a codemirror element form the script content
               var value = smartTrim( scripts[i].innerHTML );
               var mode = "javascript";
               if (params[1] === "html") {
-                mode = "htmlmixed";
+                mode = "html";
               }
               if (params[1] === "shell") {
                 mode = "";
                 value.replace(/^\$/g, '<span style="#ff9900">$</span>');
               }
               
-              var codeMirror = CodeMirror( document.body , {
+              var codeMirror = CodeMirror( container[0] , {
                 // use the innerHTML, but get rid of any staring linebreaks and prepended whitespace
                 value: value,
                 mode: mode,
                 theme: 'monokai',
-                lineNumbers: params[1] !== "shell",
+                lineNumbers: false,
                 readOnly: false
               });
 

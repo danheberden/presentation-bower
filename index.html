@@ -13,22 +13,28 @@
 </head>
 <body>
   
-  <section>
-    <h3>Clientside Package Management:</h3>
-    <h2 style="font-size:2.45em; color: #F2E14F">Less Work, More Awesome</h2>
-    <script type="text/x-code">
+  <section class="vertical">
+    <div style="float:left; width:40%;">
+      <img src="img/bower-logo.png" style="width:100%; margin-top: -5%;">
+    </div>
+    <div style="float:left; width:60%; font-size:.6em">
+      <h2 style="color: #ef5734;">Clientside Package Management:</h2>
+      <h2 style="font-size:2.85em; color: #F2E14F; clear:left;">Less Work, <br>More Awesome</h2>
+    </div>
+    <br clear="all" />
+    <script type="text/x-code" class="no-line-numbers">
       var speaker = {
         name:    'Dan Heberden',
-        website: '//danheberden.com',
         twitter: '@danheberden',
         worksAt: 'bocoup.com',
         github:  'danheberden'
       };
     </script>
+    <h3 style="clear:both; color: #2baf2b;">an introduction to bower</h3>
   </section>
 
 
-  <section>
+  <section class="vertical-in">
     <script type="text/x-shell">
       $ bower install jquery
       bower cloning git://github.com/components/jquery.git
@@ -38,6 +44,11 @@
       bower copying /Users/danheberden/.bower/cache/jquery/29cb...
 
       bower installing jquery#2.0.0
+    </script>
+    <script type="notes">
+      * bower at its simplest
+      we didn't have to know where jquery was, didn't have to look up anything jQuery might 
+      rely on, didn't have to find out what version is the latest - bower just got it
     </script>
   </section>
 
@@ -49,27 +60,30 @@
     <ul>
       <li>going to jquery.com to download?</li>
       <li>checkout out jQuery and building?</li>
-      <li>remembering the URL and wget'ing it?</li>
+      <li>remembering the URL and wget/cURL'ing it?</li>
     </ul>
   </section>
 
   <section>
-    <h2>the art of pattern</h2>
+    <h2>how bower helps</h2>
     <ul>
-      <li>easy to install scripts
-      <li>manifest file to express what to download
-      <li>a centralized place for downloaded scripts
-      <li>dependency management
+      <li>makes installing tools easy
+      <li>uses a manifest file (<code>bower.json</code>) <br>
+          to express what to download
+      <li>downloads to a centralized place (<code>./components</code>)
+      <li>resolves dependencies
     </ul>
+    <script type="notes">
+      before we get into those things, though, look at how bower works
+    </script>
   </section>
 
-  <section>
+  <section class="vertical-in">
     <h1>the future</h1>
-    <p>http://github.com/danheberden/yeoman-generator-require-demo</p>
+    <img src="img/toolset.png">
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>get yo</h2>
 
     <script type="text/x-shell">
@@ -78,7 +92,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>get the generator</h2>
 
     <script type="text/x-shell">
@@ -87,7 +100,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>generate</h2>
 
     <script type="text/x-shell">
@@ -97,7 +109,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>running?</h2>
 
     <script type="text/x-shell">
@@ -107,7 +118,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>wonder if there's a weather plugin?</h2>
 
     <script type="text/x-shell">
@@ -119,7 +129,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>no cloning, no copying, just ask</h2>
 
     <script type="text/x-shell">
@@ -132,7 +141,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>sprinkle on some html</h2>
     <script type="text/x-html">
       <!-- index.html -->
@@ -144,7 +152,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>sweet, lets use it</h2>
 
     <script type="text/x-code">
@@ -159,7 +166,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>get our current location</h2>
 
     <script type="text/x-code">
@@ -175,7 +181,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>call our required plugin with the latlong</h2>
 
     <script type="text/x-code">
@@ -189,7 +194,6 @@
   </section>
 
   <section>
-    <p>demo backup copy</p>
     <h2>update the html</h2>
 
     <script type="text/x-code">
@@ -241,7 +245,7 @@
     <p>hesitancy to use exiting solutions because of the work to include them</p>
   </section>
 
-  <section>
+  <section class="vertical">
     <h1>bower makes it fun</h1>
   </section>
 
@@ -292,20 +296,8 @@
     </script>
   </section>
 
-  <section>
-    <h1>what is a bower?</h1> 
-  </section>
-
-  <section>
-    <img src="https://secure.gravatar.com/avatar/a98244cbdacaf1c0b55499466002f7a8?s=420&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <img src="https://si0.twimg.com/profile_images/1826201101/297606_10150904890650705_570400704_21211347_1883468370_n.jpeg" />
-    <script type="text/x-notes">
-      the project started at twitter, by @fat and @maccaw. They talked 
-      to other package manager author and had obviously also felt the pangs 
-      of dealing with a lot of client-side libraries. André Cruz was/is the 
-      core developer. Since then the team has expanded, as well as the community 
-      around bower, meaning even more awesome. 
-    </script>
+  <section class="vertical">
+    <h1>more about bower</h1> 
   </section>
      
   <section>
@@ -319,6 +311,7 @@
 
    <section>
      <h2>but why the bird?</h2>
+     <script type="notes">pi is literally obsetted witih david ottenborough</script>
    </section>
 
    <section>
@@ -331,11 +324,11 @@
 
   <section>
     <iframe width="853" height="480" src="http://www.youtube.com/embed/E1zmfTr2d4c?start=108" frameborder="0" allowfullscreen></iframe>
-    <blockquote>this grand design is no nest, it's an ultimate seduction parlour</blockquote>
+    <blockquote>this grand design is no nest, it's the ultimate seduction parlour</blockquote>
   </section>
 
   <section>
-    <h4>so it's like curl, but shortened, ya?</h4>
+    <h4>so it's like cURL, but shortened, ya?</h4>
   </section>
 
   <section>
@@ -388,6 +381,14 @@
   <div id="yasd-slide-marker"></div>
   <div id="console"></div>
 
+  <div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+  </div>
 <script>
   (function(){
     var verMatch = /jqversion=([\d\w\.]+)/.exec( location.search ),
@@ -405,6 +406,8 @@
   }
 </script>
 <script src="components/codemirror/lib/codemirror.js"></script>
+<script src="components/codemirror/mode/javascript/html.js"></script>
+<script src="components/codemirror/mode/javascript/xml.js"></script>
 <script src="components/codemirror/mode/javascript/javascript.js"></script>
 <script src="components/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 <script src="components/codemirror/mode/shell/shell.js"></script>

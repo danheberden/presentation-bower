@@ -57,7 +57,7 @@ FrameManager.prototype = {
       iframe = $( '<iframe id="slide'+i+'" src="sandbox.htm">' ).appendTo( 'body' );
       iframes[i] = iframe ;
       if ( i ) {
-        iframe.addClass( 'left' );
+        iframe.addClass( 'previous' );
       }
     }
     iframes.currentFrame = 0;
@@ -124,8 +124,8 @@ FrameManager.prototype = {
         dfd = $.Deferred(),
         _this = this,
         lastSlide = _this.lastSlide || { id: 0 },
-        animateDirection = lastSlide.id >= slide.id ? 'right' : 'left',
-        animateOpposite = animateDirection == 'right' ? 'left' : 'right',
+        animateDirection = lastSlide.id >= slide.id ? 'next' : 'previous',
+        animateOpposite = animateDirection == 'next' ? 'previous' : 'next',
         sameSlide = lastSlide.id == slide.id, 
         next = iframes[ +!iframes.currentFrame ],
         current = iframes [ +iframes.currentFrame ],
@@ -151,7 +151,7 @@ FrameManager.prototype = {
         _this.lastSlide = slide;
 
         // append the slide content into the next frame
-        $( next[0].contentWindow.document.body ).append( '<section>' + slide.slide.html() + '</section>' );
+        $( next[0].contentWindow.document.body ).append( '<section class="'+slide.slide.prop('className')+'">' + slide.slide.html() + '</section>' );
 
 
         // run the init hook on the iframe
@@ -173,7 +173,7 @@ FrameManager.prototype = {
         next.data( 'slide', slide );
 
         // put the next slide where id needs to be
-        next.removeClass( 'animate' + ' ' + animateDirection ).addClass( animateOpposite );
+        next.prop('className', [animateOpposite, slide.slide.prop('className')].join(' '));
         current.removeClass( 'animate' );
         // apply the move real quick
         document.body.offsetWidth;

@@ -352,10 +352,11 @@ div.ball.yellow { background: #ebc222; }
 /* Based on Sublime Text's Monokai theme */
 .CodeMirror {
   overflow: none;
-  width:120%;
+  width:400%;
   height: auto;
   padding:0.5em 0;
-  margin-left:-10%;
+  margin-left:-150%;
+  text-align:left;
   display: -webkit-box; 
   display: -moz-box;
   display: box;
@@ -368,12 +369,20 @@ div.ball.yellow { background: #ebc222; }
   -ms-transition: all 0.8s ease-in-out;
   transition: all 0.8s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
-  background: hsla( 233, 73%, 70%, 0.0 );
-  
+  background: rgba( 0, 0, 0, 0.0);
+}
+.vertical .CodeMirror {
+  background: #333;
+  -moz-transition: all 0.8s ease-in-out;
+  -o-transition: all 0.8s ease-in-out;
+  -ms-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+  -webkit-transition: all 0.0s ease-in-out;
 }
 body.loaded .CodeMirror {
-  /*background: hsla( 233, 73%, 70%, 0.2 );*/
-  background: rgba( 145, 142, 142, 0.2 );
+  /*background: hsla( 233, 73%, 70%, 0.2 );
+  background: rgba( 145, 142, 142, 0.2 );*/
+  background: #333;
   box-shadow: inset 0 0.1em 0.2em rgba(0,0,0,0.6);
    
 }
@@ -383,6 +392,10 @@ body.loaded .CodeMirror {
 .CodeMirror-gutters {
   background:none;
   border-right: none;
+}
+.no-line-numbers .CodeMirror-gutters,
+.no-line-numbers .CodeMirror-linenumber{
+  display:none;
 }
 section { text-align: center; padding:0em 0.4em; }
 body .cm-s-monokai { color: #F8F8F2; font-size:0.8em; letter-spacing: -0.06em; overflow: hidden;}
