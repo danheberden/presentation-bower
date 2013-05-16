@@ -6,6 +6,73 @@
   <script src="js/sandbox.js"></script>
   <script>
     (function(window){
+
+     var shell = function(content) {
+       var lines = smartTrim( content ).split('\n')
+       var container = $('<div>');
+       var run = function(command) {
+         var process = $.Deferred();
+         var div = $('<div class="command">$ </div>');
+         var chars = command.split('').slice(2);
+         var index = 0;
+         var print = function() {
+           if (index++ < chars.length) {
+             div[0].innerHTML += chars[index-1];
+             setTimeout(print, 60);
+           // done with output
+           } else {
+             process.resolve();
+           }
+         };
+         container.append(div);
+         setTimeout(print, 1000);
+         return process.promise();
+       };
+       
+       var feed = function(lines) {
+         var process = $.Deferred();
+         var div = $('<div class="ouput">');
+         var index = 0;
+         var print = function() {
+           if ( index++ < lines.length) {
+             div.append($('<div class="line">').html(lines[index-1]));
+             setTimeout(print, 420);
+           } else {
+             process.resolve();
+           }
+         };
+         print();
+         container.append(div);
+         return process.promise();
+       };
+
+       var commands = [];
+       $.each(lines, function(i, v) {
+         var command;
+         // command
+         if ( /^\$/.test(v) ) {
+           command = [];
+           commands.push(command);
+           command.push(v);
+         } else {
+           command = commands[commands.length-1];
+           commands[commands.length-1].push(v);
+         }
+       });
+       var printing = $.Deferred();
+       var printingStep = printing.promise();
+
+       $.each(commands, function(i, v) {
+         printingStep = printingStep.then(function() {
+           return run(v[0]).then(function() {
+             return feed(v.slice(1));
+           });
+         });
+       });
+       printing.resolve();
+
+       return $('<div class="CodeMirror shell">').append(container);
+     };
       var smartTrim = function( content ) {
         // get rid of any whitespace followed by a new line or at the end
         content = content.replace( /^(\n|[ \t]+\n)/g, '' )
@@ -55,11 +122,11 @@
               var value = smartTrim( scripts[i].innerHTML );
               var mode = "javascript";
               if (params[1] === "html") {
-                mode = "html";
+                mode = "htmlmixed";
               }
               if (params[1] === "shell") {
-                mode = "";
-                value.replace(/^\$/g, '<span style="#ff9900">$</span>');
+                container.append( shell(scripts[i].innerHTML) );
+                return;
               }
               
               var codeMirror = CodeMirror( container[0] , {

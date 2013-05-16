@@ -530,7 +530,7 @@ iframe.animate {
 }
 
 @-webkit-keyframes moveclouds {
-  0% {margin-left: 100em;}
+  0% {-webkit-trans: 100em;}
   100% {margin-left: -100em;}
 }
 @-moz-keyframes moveclouds {

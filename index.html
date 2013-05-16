@@ -34,7 +34,7 @@
   </section>
 
 
-  <section class="vertical-in">
+  <section class="vertical-in compact" >
     <script type="text/x-shell">
       $ bower install jquery
       bower cloning git://github.com/components/jquery.git
@@ -103,7 +103,6 @@
     <h2>generate</h2>
 
     <script type="text/x-shell">
-      $ mkdir yahooWeatherApp && cd yahooWeatherApp
       $ yo requirejs
     </script>
   </section>
@@ -114,29 +113,29 @@
     <script type="text/x-shell">
       $ grunt preview
     </script>
-    <p>open http://localhost:8000/index.htm </p>
+    <p>open <a href="http://localhost:8000/index.htm">localhost:8000/index.htm</a></p>
   </section>
 
-  <section>
+  <section class="compact">
     <h2>wonder if there's a weather plugin?</h2>
 
     <script type="text/x-shell">
       $ bower search weather
 
       jquery-simpleweather git://github.com/monkeecreate/jquery.simpleWeather
-      yahooWeather git://github.com/danheberden/jquery-yahooWeather
+      weather git://github.com/danheberden/jquery-weather.git
     </script>
   </section>
 
-  <section>
+  <section class="compact">
     <h2>no cloning, no copying, just ask</h2>
 
     <script type="text/x-shell">
-      $ bower install yahooWeather --save
-      # --save adds yahooWeather's latest version to the bower.json file
+      $ bower install weather --save
+      # --save adds weather's latest version to the bower.json file
       # ...
       bower installing jquery#2.0.0
-      bower installing yahooWeather#0.1.1
+      bower installing weather#0.2.3
     </script>
   </section>
 
@@ -158,58 +157,49 @@
       // app/main.js
       require([
           "jquery", 
-          "components/yahooWeather/yahooWeather.js"
-        ], function($, yahooWeather) {
-
+          "components/weather/weather.js"
+        ], function($, weather) {
+         
       });
     </script>
   </section>
 
   <section>
-    <h2>get our current location</h2>
+    <h2>call weather and update the page</h2>
+
+    <script type="text/x-code">
+      // app/main.js in the geolocation function block
+      
+      function getWeather(position) {
+        weather(position, function(err, result) {
+          $('#temp').html(weather.condition.temp + 'º');
+          $('#status').html(weather.condition.symbols.join(''))
+            .prop('className', weather.condition.symbolLevel);
+          $('#statusText').html(weather.condition.text);
+          $('#time').html(weather.title);
+        });
+      };
+    </script>
+  </section>
+  <section>
+    <h2>get our current location and run the function</h2>
 
     <script type="text/x-code">
       // app/main.js in the function block
 
       // get the location
-      navigator.geolocation.getCurrentPosition(function(locale) {
-        // do something with locale
+      navigator.geolocation.getCurrentPosition(function(loc) {
+        getWeather([loc.coords.latitude, loc.coords.longitude]); 
       }, function(error) {
-        alert(error.message);
+        var zip = prompt(error + '\n\n' + 'Enter ZIP');
+        getWeather(zip);
       });
-    </script>
-  </section>
-
-  <section>
-    <h2>call our required plugin with the latlong</h2>
-
-    <script type="text/x-code">
-      // app/main.js in the geolocation function block
-
-      var position = [locale.coords.latitude, locale.coords.longitude];
-      yahooWeather(position, function(err, weather) {
-        // do something with weather object
-      });
-    </script>
-  </section>
-
-  <section>
-    <h2>update the html</h2>
-
-    <script type="text/x-code">
-      // app/main.js in the yahooWeather block
-
-      $('#temp').html(weather.condition.temp + 'º');
-      $('#status').html(weather.condition.symbols.join(''))
-        .prop('className', weather.condition.symbolLevel);
-      $('#statusText').html(weather.condition.text.toLowerCase());
-      $('#time').html(weather.title);
     </script>
   </section>
 
   <section>
     <h1>boom done</h1>
-    <img src="https://a248.e.akamai.net/camo.github.com/7c23fd4e521c3f19a01d452372bfe79cb4203f9f/687474703a2f2f64616e686562657264656e2e636f6d2f73686172652f663264322e706e67" />
+    <img src="img/boom-done.png" style="min-width:150%;margin-left:-25%;" />
   </section>
 
   <!-- 6 min -->
@@ -218,11 +208,11 @@
     <h2>bower.json</h2>
     <script type="text/x-code">
       {
-        "name": "yahooWeatherApp",
+        "name": "my-weather-app",
         "dependencies": {
           "requirejs": "~2.1.5",
           "jquery": ">= 1.8.0",
-          "yahooWeather": "~0.1.1"
+          "weather": "~0.2.3"
         }
       } 
     </script>
@@ -238,23 +228,111 @@
 
   <section>
     <script type="text/x-notes">
-      Sure, going to hotscripts.com and finding some script to copy into your project was fun. Ten years ago. It's time to move away from problems like:
+      Sure, going to hotscripts.com and finding some script to copy into your project is fun. Ten years ago. It's time to move away from problems like:
     </script>
-    <p>open/public code being committed into repositories</p>
-    <p>sticking with older, buggy versions because upgrading is a PITA</p>
-    <p>hesitancy to use exiting solutions because of the work to include them</p>
+    <ul>
+      <li>open/public code being committed into repositories
+      <li>sticking with older, buggy versions because upgrading is a PITA
+      <li>hesitancy to use exiting solutions because of the work to include them
+  </ul>
   </section>
 
   <section class="vertical">
-    <h1>bower makes it fun</h1>
+    <h1>bower makes it awesome!</h1>
   </section>
 
-  <section>
+  <section class="compact">
     <h2>installation</h2>
     <script type="text/x-notes">This is the first problem that bower addresses. Instead of hunting down the right 
     files and dependent tools to download, bower simplifies the work of getting a package 
     and its dependencies. …and all of its dependencies' dependencices.</script>
+    <script type="text/x-shell">
+      $ bower install weather
+      bower cloning git://github.com/danheberden/jquery-weather.git
+      bower cached git://github.com/danheberden/jquery-weather.git
+      bower fetching weather
+      bower checking out weather#v0.2.3
+      bower copying /Users/username/.bower/cache/weather/903...
+      bower cloning git://github.com/components/jquery.git
+      bower cached git://github.com/components/jquery.git
+      bower fetching jquery
+      bower checking out jquery#2.0.0
+      bower copying /Users/username/.bower/cache/jquery/29c...
+      bower installing weather#0.2.3
+      bower installing jquery#2.0.0
+    </script>
   </section>
+
+  <section>
+    <h3>installation via manifest file</h3>
+    <script type="text/x-code">
+      // bower.json
+      {
+        "name": "my-app",
+        "dependencies": {
+          "weather": "~0.2.3"
+        }
+      }
+    </script>
+    <script type="text/x-shell">
+      $ bower install
+      # ... 
+      bower installing weather#0.2.3
+      bower installing jquery#2.0.0
+    </script>
+  </section>
+
+  <section>
+    <h3>editing the manifest file</h3>
+    <script type="text/x-code">
+      // bower.json
+      {
+        "name": "my-app",
+        "dependencies": {
+          "weather": "0.2.0"
+        }
+      }
+    </script>
+    <script type="text/x-shell">
+      $ bower install
+      # ... 
+      bower installing weather#0.2.3
+      bower installing jquery#2.0.0
+    </script>
+  </section>
+
+  <section class="compact">
+    <h3>targetting versions</h3>
+    <script type="text/x-shell">
+      $ bower install jquery#1.8.0
+      bower cloning git://github.com/components/jquery.git
+      bower cached git://github.com/components/jquery.git
+      bower fetching jquery
+      bower checking out jquery#1.8.0
+      bower warn Package jquery is still using the deprecated...
+      bower copying /Users/username/.bower/cache/jquery/29c...
+      bower installing jquery#1.8.0
+    </script>
+  </section>
+
+  <section>
+    <h3>adding to the manifest file</h3>
+    <p>you <em>can</em> manually edit the <code>bower.json</code> file, you just don't <em>have</em> to</p>
+    <script type="text/x-code">
+      // bower.json
+      {
+        "name": "my-app",
+        "dependencies": {
+          "requirejs": "2.0.0",
+          "jquery": "~1.8.0"
+        }
+      }
+    </script>
+    <script type="text/x-shell">
+      $ bower install jquery#1.8.0 --save
+    </script>
+  </section>
+
 
   <section>
     <h2>upgrading</h2>
@@ -263,15 +341,52 @@
       easy to try a new/upgraded version of a plugin.
     </script>
   </section>
+
+  <section class="compact">
+    <h2>in fact, bower helps out with that</h2>
+    <script type="text/x-shell">
+      $ bower ls
+      bower discover Please wait while newer package versions are being discovered
+      test4
+      ├── jquery#1.8.0 (2.0.0 now available)
+      └─┬ weather#0.2.0 (0.2.3 now available)
+        └── jquery#1.8.0 (2.0.0 now available)
+    </script>
+  </section>
+
+  <section>
+    <script type="text/x-shell">
+      $ bower update jquery
+      # ...
+      bower installing jquery#1.8.3
+    </script>
+    <p>Why didn't it install <code>2.0.0</code>?</p>
+  </section>
     
   <section>
-    <h2>kick the tires</h2>
-    <script type="text/x-notes">
-      Now you can run your unit tests, run the app, 
-      and kick the tires of your project with this change. If you find 
-      you can upgrade to this new version, you can either use the bower install 
-      jquery#1.9.1 --save feature or edit your bower.json file manually 
+    <h3>semver all the things</h3>
+    <script type="text/x-code">
+      // bower.json
+      {
+        "name": "my-app",
+        "dependencies": {
+          "weather": "~0.2.0",
+          "jquery": ">= 1.8.0"
+        }
+      }
     </script>
+  </section>
+
+  <section>
+    <script type="text/x-shell">
+      $ bower install
+      # ...
+      bower installing jquery#2.0.0
+    </script>
+  </section>
+
+  <section>
+    <h2>the power of <code>bower.json</code></h2>
   </section>
 
   <section>
@@ -297,7 +412,7 @@
   </section>
 
   <section class="vertical">
-    <h1>more about bower</h1> 
+    <h1>the origins of bower</h1> 
   </section>
      
   <section>
@@ -315,11 +430,11 @@
    </section>
 
    <section>
-    <img src="http://paulirish.com/i/824330.png" style="max-height:100%;">
+    <img src="http://paulirish.com/i/824330.png" style="min-height:80%;">
    </section>
 
    <section>
-    <img src="http://danheberden.com/share/590f.png">
+    <img src="http://danheberden.com/share/590f.png" style="min-height:60%;">
    </section>
 
   <section>
@@ -328,7 +443,7 @@
   </section>
 
   <section>
-    <h4>so it's like cURL, but shortened, ya?</h4>
+    <h4>&ldquo;so it's like a url shortener for js libs, then?&rdquo;</h4>
   </section>
 
   <section>
@@ -336,8 +451,9 @@
   </section>
 
   <section>
-    <p>bower is a package <em>manager</em> &amp; dependency resolver</p>
+    <h4>bower is a package <em>manager</em> &amp; dependency resolver</h4>
   </section>
+
 
   <section>
     <h2>not just good for you</h2>
@@ -352,7 +468,7 @@
     <h4>prevents old source code getting commited into projects</h4>
     <script type="text/x-notes">
       if you've ever had two versions of jQuery in your project you know exactly what I mean. Your 
-        &lt;script> tags shouldn't be your version control.
+      &lt;script> tags shouldn't be your version control.
     </script>
   </section>
 
@@ -361,6 +477,7 @@
   </section>
 
   <section>
+    <h2>some old version of jQuery</h2>
     <script type="text/x-shell">
       $ bower install jquery#1.8.0
     </script>
@@ -406,8 +523,7 @@
   }
 </script>
 <script src="components/codemirror/lib/codemirror.js"></script>
-<script src="components/codemirror/mode/javascript/html.js"></script>
-<script src="components/codemirror/mode/javascript/xml.js"></script>
+<script src="components/codemirror/mode/xml/xml.js"></script>
 <script src="components/codemirror/mode/javascript/javascript.js"></script>
 <script src="components/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 <script src="components/codemirror/mode/shell/shell.js"></script>
