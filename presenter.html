@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <title>presenter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="components/socket.io-client/dist/socket.io.js"></script>
+  <script>
+    var socket = io.connect(location.origin + ':8001');
+    socket.on('get', function (data) {
+      document.getElementById('preview').innerHTML = data;
+    });
+    document.addEventListener('click', function(e) {
+      if ( /previous/.test(e.target.id) ) {
+        socket.emit('gotoPrevious');
+      }
+      if ( /next/.test(e.target.id) ) {
+        socket.emit('gotoNext');
+      }
+    });
+
+  </script>
+  <style>
+    body { margin: 0; padding: 0;}
+    *{ box-sizing: border-box;  }
+    #controls {
+      width:100%;
+    }
+    #controls button {
+      width: 49%;
+      margin:0;
+      font-size:1.3em;
+    }
+    h1, h2, h3, h4 {
+      font-size:2.3em;
+    }
+    .notes {
+      padding:1em;
+      background:#F0F5B8;
+    }
+    </style>
+
+</head>
+<body>
+  <div id="controls">
+    <button id="previous">PREVIOUS</button>
+    <button id="next">NEXT</button>
+  </div>
+  <div id="preview"></div>
+</body>
+</html>

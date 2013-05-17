@@ -35,7 +35,7 @@
          var index = 0;
          var print = function() {
            if ( index++ < lines.length) {
-             div.append($('<div class="line">').html(lines[index-1]));
+             div.append($('<pre class="line">').html(lines[index-1]));
              setTimeout(print, 420);
            } else {
              process.resolve();
@@ -119,7 +119,7 @@
               // create an element after the script tag
               var container = $('<div>').insertAfter(scripts[i]).prop('className', scripts[i].className);
               // make a codemirror element form the script content
-              var value = smartTrim( scripts[i].innerHTML );
+              var value = smartTrim( scripts[i].innerHTML ).replace(/\+script/g, 'script');
               var mode = "javascript";
               if (params[1] === "html") {
                 mode = "htmlmixed";

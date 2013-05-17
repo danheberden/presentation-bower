@@ -319,7 +319,7 @@ body {
   -webkit-box-align: center;
   -moz-box-align: center;
   box-align: center;
-  font-size:4em;
+  font-size:3.1em;
 }
 img.bob {
   float:right;
@@ -331,7 +331,7 @@ p code {
   padding: 0 0.2em;
   text-shadow: 0 0 0.1em rgba(255,255,255,0.4);
 }
-ul { margin: 0.2em 0; }
+ul { margin: 0.2em 0; font-size:1.1em; }
 li { text-align:left; }
 h1, h2, h3, h4, h5, h6 { color: hsl( 216, 65%, 49% );  font-weight:bold; text-shadow: 0em 0em .02em #EEE, .01em .01em .03em  rgba( 0,0,0,0.4); margin-bottom:.1em; margin-top: 0;text-align:center; }
 h1 { font-size:2.5em;  }
@@ -389,6 +389,12 @@ body.loaded .CodeMirror {
 }
 .compact .CodeMirror {
   font-size: 0.7em;
+}
+.compact-2 .CodeMirror {
+  font-size: 0.6em;
+  width: 600%;
+  margin-left:-250%;
+
 }
 .CodeMirror.shell {
   color: #CCC;

@@ -4,6 +4,36 @@
  *
  * Don't judge me, this is a very rushed alpha of this project and it's messy, i know
  */
+var socket = io.connect(location.origin + ':8001');
+function postSlide(current, next) {
+  var content = "";
+  if (!current || !current.jquery) {
+    content += "NOT FOUND";
+  } else {
+    var currentNotes = current.find('script[type="notes"]').each(function() {
+      content += '<div class="notes">' + $(this).html().replace(/\\n/g, '<br><br>') + '</div>';
+    });
+  }
+
+  if (next && next.jquery) {
+
+    var cloned = next.clone();
+
+    cloned.find('script[type^=text]').each(function() {
+      var script = $(this);
+      var content = script.html()
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      var pre = $('<pre>').html(content);
+      pre.insertBefore(script);
+    });
+
+    content += cloned.html();
+  }
+
+  socket.emit('post', content);  
+};
+
 
 $.fn.yasd = function( method ){
   if ( !this.length ) {
@@ -152,6 +182,10 @@ FrameManager.prototype = {
 
         // append the slide content into the next frame
         $( next[0].contentWindow.document.body ).append( '<section class="'+slide.slide.prop('className')+'">' + slide.slide.html() + '</section>' );
+ 
+        // publish the next slide's content to remote listeners
+        var upcoming = _this.slides.slides[_this.slides.currentSlide + 1];
+        postSlide(slide.slide, upcoming ? upcoming.slide : undefined);
 
 
         // run the init hook on the iframe
@@ -331,5 +365,11 @@ $( document ).ready( function() {
       slides.goto( +fragment );
     }
   });
-	$window.trigger( 'hashchange' );
+  $window.trigger( 'hashchange' );
+  socket.on('slidePrevious', function() {
+    slides.remote('-=1');
+  });
+  socket.on('slideNext', function() {
+    slides.remote('+=1');
+  });
 });

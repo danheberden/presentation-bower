@@ -19,7 +19,7 @@
     </div>
     <div style="float:left; width:60%; font-size:.6em">
       <h2 style="color: #ef5734;">Clientside Package Management:</h2>
-      <h2 style="font-size:2.85em; color: #F2E14F; clear:left;">Less Work, <br>More Awesome</h2>
+      <h2 style="font-size:2.85em; color: rgb(75, 48, 13); clear:left;">Less Work, <br>More Awesome</h2>
     </div>
     <br clear="all" />
     <script type="text/x-code" class="no-line-numbers">
@@ -44,310 +44,316 @@
       bower copying /Users/danheberden/.bower/cache/jquery/29cb...
 
       bower installing jquery#2.0.0
-    </script>
-    <script type="notes">
-      * bower at its simplest
-      we didn't have to know where jquery was, didn't have to look up anything jQuery might 
-      rely on, didn't have to find out what version is the latest - bower just got it
-    </script>
-  </section>
+  </script>
+  <script type="notes">
+    * bower at its simplest
+    we didn't have to know where jquery was, didn't have to look up anything jQuery might 
+    rely on, didn't have to find out what version is the latest - bower just got it
+  </script>
+</section>
 
-  <section>
-    <h1>what does getting jQuery look like for you?</h1>
-  </section>
+<section>
+  <h1>what does getting jQuery look like for you?</h1>
+</section>
 
-  <section>
-    <ul>
-      <li>going to jquery.com to download?</li>
-      <li>checkout out jQuery and building?</li>
-      <li>remembering the URL and wget/cURL'ing it?</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>how bower helps</h2>
-    <ul>
-      <li>makes installing tools easy
-      <li>uses a manifest file (<code>bower.json</code>) <br>
-          to express what to download
-      <li>downloads to a centralized place (<code>./components</code>)
-      <li>resolves dependencies
-    </ul>
-    <script type="notes">
-      before we get into those things, though, look at how bower works
-    </script>
-  </section>
-
-  <section class="vertical-in">
-    <h1>the future</h1>
-    <img src="img/toolset.png">
-  </section>
-
-  <section>
-    <h2>get yo</h2>
-
-    <script type="text/x-shell">
-      $ npm install -g yo
-    </script>
-  </section>
-
-  <section>
-    <h2>get the generator</h2>
-
-    <script type="text/x-shell">
-      $ npm install -g generator-requirejs
-    </script>
-  </section>
-
-  <section>
-    <h2>generate</h2>
-
-    <script type="text/x-shell">
-      $ yo requirejs
-    </script>
-  </section>
-
-  <section>
-    <h2>running?</h2>
-
-    <script type="text/x-shell">
-      $ grunt preview
-    </script>
-    <p>open <a href="http://localhost:8000/index.htm">localhost:8000/index.htm</a></p>
-  </section>
-
-  <section class="compact">
-    <h2>wonder if there's a weather plugin?</h2>
-
-    <script type="text/x-shell">
-      $ bower search weather
-
-      jquery-simpleweather git://github.com/monkeecreate/jquery.simpleWeather
-      weather git://github.com/danheberden/jquery-weather.git
-    </script>
-  </section>
-
-  <section class="compact">
-    <h2>no cloning, no copying, just ask</h2>
-
-    <script type="text/x-shell">
-      $ bower install weather --save
-      # --save adds weather's latest version to the bower.json file
-      # ...
-      bower installing jquery#2.0.0
-      bower installing weather#0.2.3
-    </script>
-  </section>
-
-  <section>
-    <h2>sprinkle on some html</h2>
-    <script type="text/x-html">
-      <!-- index.html -->
-      <div id="temp"></div>
-      <div id="status"></div>
-      <div id="statusText"></div>
-      <div id="time"></div>
-    </script>
-  </section>
-
-  <section>
-    <h2>sweet, lets use it</h2>
-
-    <script type="text/x-code">
-      // app/main.js
-      require([
-          "jquery", 
-          "components/weather/weather.js"
-        ], function($, weather) {
-         
-      });
-    </script>
-  </section>
-
-  <section>
-    <h2>call weather and update the page</h2>
-
-    <script type="text/x-code">
-      // app/main.js in the geolocation function block
-      
-      function getWeather(position) {
-        weather(position, function(err, result) {
-          $('#temp').html(weather.condition.temp + 'º');
-          $('#status').html(weather.condition.symbols.join(''))
-            .prop('className', weather.condition.symbolLevel);
-          $('#statusText').html(weather.condition.text);
-          $('#time').html(weather.title);
-        });
-      };
-    </script>
-  </section>
-  <section>
-    <h2>get our current location and run the function</h2>
-
-    <script type="text/x-code">
-      // app/main.js in the function block
-
-      // get the location
-      navigator.geolocation.getCurrentPosition(function(loc) {
-        getWeather([loc.coords.latitude, loc.coords.longitude]); 
-      }, function(error) {
-        var zip = prompt(error + '\n\n' + 'Enter ZIP');
-        getWeather(zip);
-      });
-    </script>
-  </section>
-
-  <section>
-    <h1>boom done</h1>
-    <img src="img/boom-done.png" style="min-width:150%;margin-left:-25%;" />
-  </section>
-
-  <!-- 6 min -->
-
-  <section>
-    <h2>bower.json</h2>
-    <script type="text/x-code">
-      {
-        "name": "my-weather-app",
-        "dependencies": {
-          "requirejs": "~2.1.5",
-          "jquery": ">= 1.8.0",
-          "weather": "~0.2.3"
-        }
-      } 
-    </script>
-  </section>
-
-  <section>
-    <h2>why a client-side package manager</h2>
-  </section>
-
-  <section>
-    <h2>using client-side tools should be easy</h2>
-  </section>
-
-  <section>
-    <script type="text/x-notes">
-      Sure, going to hotscripts.com and finding some script to copy into your project is fun. Ten years ago. It's time to move away from problems like:
-    </script>
-    <ul>
-      <li>open/public code being committed into repositories
-      <li>sticking with older, buggy versions because upgrading is a PITA
-      <li>hesitancy to use exiting solutions because of the work to include them
+<section>
+  <ul>
+    <li>going to jquery.com to download?</li>
+    <li>checkout out jQuery and building?</li>
+    <li>remembering the URL and wget/cURL'ing it?</li>
   </ul>
-  </section>
+</section>
 
-  <section class="vertical">
-    <h1>bower makes it awesome!</h1>
-  </section>
+<section>
+  <h2>how bower helps</h2>
+  <ul>
+    <li>makes installing tools easy
+    <li>uses a manifest file (<code>./bower.json</code>) <br>
+        to express what to download
+    <li>downloads to a centralized place (<code>./components</code>)
+    <li>resolves dependencies
+  </ul>
+  <script type="notes">
+    before we get into those things, though, look at how bower works
+  </script>
+</section>
 
-  <section class="compact">
-    <h2>installation</h2>
-    <script type="text/x-notes">This is the first problem that bower addresses. Instead of hunting down the right 
-    files and dependent tools to download, bower simplifies the work of getting a package 
-    and its dependencies. …and all of its dependencies' dependencices.</script>
-    <script type="text/x-shell">
-      $ bower install weather
-      bower cloning git://github.com/danheberden/jquery-weather.git
-      bower cached git://github.com/danheberden/jquery-weather.git
-      bower fetching weather
-      bower checking out weather#v0.2.3
-      bower copying /Users/username/.bower/cache/weather/903...
-      bower cloning git://github.com/components/jquery.git
-      bower cached git://github.com/components/jquery.git
-      bower fetching jquery
-      bower checking out jquery#2.0.0
-      bower copying /Users/username/.bower/cache/jquery/29c...
-      bower installing weather#0.2.3
-      bower installing jquery#2.0.0
-    </script>
-  </section>
+<section class="vertical-in">
+  <h1>the future</h1>
+  <img src="img/toolset.png" style="max-width:100%;">
+</section>
 
-  <section>
-    <h3>installation via manifest file</h3>
-    <script type="text/x-code">
-      // bower.json
-      {
-        "name": "my-app",
-        "dependencies": {
-          "weather": "~0.2.3"
-        }
+<section>
+  <h2>get yo</h2>
+
+  <script type="text/x-shell">
+    $ npm install -g yo
+  </script>
+</section>
+
+<section>
+  <h2>get the generator</h2>
+
+  <script type="text/x-shell">
+    $ npm install -g generator-requirejs
+  </script>
+</section>
+
+<section>
+  <h2>generate</h2>
+
+  <script type="text/x-shell">
+    $ yo requirejs
+  </script>
+</section>
+
+<section>
+  <h2>running?</h2>
+
+  <script type="text/x-shell">
+    $ grunt preview
+  </script>
+  <p>open <a href="http://localhost:8000/index.htm">localhost:8000/index.htm</a></p>
+</section>
+
+<section class="compact-2">
+  <h2>wonder if there's a weather plugin?</h2>
+
+  <script type="text/x-shell">
+    $ bower search weather
+
+    jquery-simpleweather git://github.com/monkeecreate/jquery.simpleWeather
+    weather git://github.com/danheberden/jquery-weather.git
+  </script>
+</section>
+
+<section class="compact">
+  <h2>no cloning, no copying, just ask</h2>
+
+  <script type="text/x-shell">
+    $ bower install weather --save
+    # --save adds weather's latest version to the bower.json file
+    # ...
+    bower installing jquery#2.0.0
+    bower installing weather#0.2.3
+  </script>
+</section>
+
+<section>
+  <h2>sprinkle on some html</h2>
+  <script type="text/x-html">
+    <!-- index.html -->
+    <div id="temp"></div>
+    <div id="status"></div>
+    <div id="statusText"></div>
+    <div id="time"></div>
+  </script>
+</section>
+
+<section>
+  <h2>sweet, lets use it</h2>
+
+  <script type="text/x-code">
+    // app/main.js
+    require([
+        "jquery", 
+        "components/weather/weather.js"
+      ], function($, weather) {
+       
+    });
+  </script>
+</section>
+
+<section>
+  <h2>call weather and update the page</h2>
+
+  <script type="text/x-code">
+    // app/main.js in the geolocation function block
+    
+    function getWeather(position) {
+      weather(position, function(err, result) {
+        $('#temp').html(weather.condition.temp + '°');
+        $('#status').html(weather.condition.symbols.join(''))
+        $('#statusText').html(weather.condition.text);
+        $('#time').html(weather.title);
+      });
+    };
+  </script>
+</section>
+<section>
+  <h2>get our current location and run the function</h2>
+
+  <script type="text/x-code">
+    // app/main.js in the function block
+
+    // get the location
+    navigator.geolocation.getCurrentPosition(function(loc) {
+      getWeather([loc.coords.latitude, loc.coords.longitude]); 
+    }, function(error) {
+      var zip = prompt(error + '\n\n' + 'Enter ZIP');
+      getWeather(zip);
+    });
+  </script>
+</section>
+
+<section>
+  <h1>boom done</h1>
+  <img src="img/boom-done.png" style="min-width:150%;margin-left:-25%;" />
+</section>
+
+<!-- 6 min -->
+
+<section>
+  <h2>bower.json</h2>
+  <script type="text/x-code">
+    {
+      "name": "my-weather-app",
+      "dependencies": {
+        "requirejs": "~2.1.5",
+        "jquery": ">= 1.8.0",
+        "weather": "~0.2.3"
       }
-    </script>
-    <script type="text/x-shell">
-      $ bower install
-      # ... 
-      bower installing weather#0.2.3
-      bower installing jquery#2.0.0
-    </script>
-  </section>
+    } 
+  </script>
+  <script type="notes">
+      generated dependencies
 
-  <section>
-    <h3>editing the manifest file</h3>
-    <script type="text/x-code">
-      // bower.json
-      {
-        "name": "my-app",
-        "dependencies": {
-          "weather": "0.2.0"
-        }
+      added current version
+
+      locked in minor version
+  </script>
+</section>
+
+<section>
+  <h2>why a client-side package manager</h2>
+</section>
+
+<section>
+  <h2>using client-side tools should be easy</h2>
+  <script type="notes">
+    Sure, going to hotscripts.com and finding some script to copy into your project is fun. Ten years ago. It's time to move away from problems like:
+  </script>
+</section>
+
+<section>
+  <ul>
+    <li>open/public code being committed into repositories
+    <li>sticking with older, buggy versions because upgrading is a PITA
+    <li>hesitancy to use exiting solutions because of the work to include them
+</ul>
+</section>
+
+<section class="vertical">
+  <h1>bower makes it awesome!</h1>
+</section>
+
+<section class="compact">
+  <h2>installation</h2>
+  <script type="notes">This is the first problem that bower addresses. Instead of hunting down the right 
+  files and dependent tools to download, bower simplifies the work of getting a package 
+  and its dependencies. …and all of its dependencies' dependencices.</script>
+  <script type="text/x-shell">
+    $ bower install weather
+    bower cloning git://github.com/danheberden/jquery-weather.git
+    bower cached git://github.com/danheberden/jquery-weather.git
+    bower fetching weather
+    bower checking out weather#v0.2.3
+    bower copying /Users/username/.bower/cache/weather/903...
+    bower cloning git://github.com/components/jquery.git
+    bower cached git://github.com/components/jquery.git
+    bower fetching jquery
+    bower checking out jquery#2.0.0
+    bower copying /Users/username/.bower/cache/jquery/29c...
+    bower installing weather#0.2.3
+    bower installing jquery#2.0.0
+  </script>
+</section>
+
+<section>
+  <h3>installation via manifest file</h3>
+  <script type="text/x-code">
+    // bower.json
+    {
+      "name": "my-app",
+      "dependencies": {
+        "weather": "~0.2.3"
       }
-    </script>
-    <script type="text/x-shell">
-      $ bower install
-      # ... 
-      bower installing weather#0.2.3
-      bower installing jquery#2.0.0
-    </script>
-  </section>
+    }
+  </script>
+  <script type="text/x-shell">
+    $ bower install
+    # ... 
+    bower installing weather#0.2.3
+    bower installing jquery#2.0.0
+  </script>
+</section>
 
-  <section class="compact">
-    <h3>targetting versions</h3>
-    <script type="text/x-shell">
-      $ bower install jquery#1.8.0
-      bower cloning git://github.com/components/jquery.git
-      bower cached git://github.com/components/jquery.git
-      bower fetching jquery
-      bower checking out jquery#1.8.0
-      bower warn Package jquery is still using the deprecated...
-      bower copying /Users/username/.bower/cache/jquery/29c...
-      bower installing jquery#1.8.0
-    </script>
-  </section>
-
-  <section>
-    <h3>adding to the manifest file</h3>
-    <p>you <em>can</em> manually edit the <code>bower.json</code> file, you just don't <em>have</em> to</p>
-    <script type="text/x-code">
-      // bower.json
-      {
-        "name": "my-app",
-        "dependencies": {
-          "requirejs": "2.0.0",
-          "jquery": "~1.8.0"
-        }
+<section>
+  <h3>editing the manifest file</h3>
+  <script type="text/x-code">
+    // bower.json
+    {
+      "name": "my-app",
+      "dependencies": {
+        "weather": "0.2.0"
       }
-    </script>
-    <script type="text/x-shell">
-      $ bower install jquery#1.8.0 --save
+    }
+  </script>
+  <script type="text/x-shell">
+    $ bower install
+    # ... 
+    bower installing weather#0.2.0
+    bower installing jquery#2.0.0
+  </script>
+</section>
+
+<section class="compact">
+  <h3>targetting versions</h3>
+  <script type="text/x-shell">
+    $ bower install jquery#1.8.0
+    bower cloning git://github.com/components/jquery.git
+    bower cached git://github.com/components/jquery.git
+    bower fetching jquery
+    bower checking out jquery#1.8.0
+    bower warn Package jquery is still using the deprecated...
+    bower copying /Users/username/.bower/cache/jquery/29c...
+    bower installing jquery#1.8.0
+  </script>
+</section>
+
+<section>
+  <h3>adding to the manifest file</h3>
+  <p>you <em>can</em> manually edit the <code>bower.json</code> file, you just don't <em>have</em> to</p>
+  <script type="text/x-code">
+    // bower.json
+    {
+      "name": "my-app",
+      "dependencies": {
+        "requirejs": "2.0.0",
+        "jquery": "~1.8.0"
+      }
+    }
+  </script>
+  <script type="text/x-shell">
+    $ bower install jquery#1.8.0 --save
+  </script>
+</section>
+
+
+<section>
+  <h2>upgrading</h2>
+  <script type="notes">
+    Since required packages don't have to be committed into the project, it's 
+    easy to try a new/upgraded version of a plugin.
     </script>
   </section>
 
-
-  <section>
-    <h2>upgrading</h2>
-    <script type="text/x-notes">
-      Since required packages don't have to be committed into the project, it's 
-      easy to try a new/upgraded version of a plugin.
-    </script>
-  </section>
-
-  <section class="compact">
+  <section class="compact-2">
     <h2>in fact, bower helps out with that</h2>
     <script type="text/x-shell">
       $ bower ls
       bower discover Please wait while newer package versions are being discovered
-      test4
+      my-weather-app
       ├── jquery#1.8.0 (2.0.0 now available)
       └─┬ weather#0.2.0 (0.2.3 now available)
         └── jquery#1.8.0 (2.0.0 now available)
@@ -360,28 +366,8 @@
       # ...
       bower installing jquery#1.8.3
     </script>
-    <p>Why didn't it install <code>2.0.0</code>?</p>
-  </section>
-    
-  <section>
-    <h3>semver all the things</h3>
-    <script type="text/x-code">
-      // bower.json
-      {
-        "name": "my-app",
-        "dependencies": {
-          "weather": "~0.2.0",
-          "jquery": ">= 1.8.0"
-        }
-      }
-    </script>
-  </section>
-
-  <section>
-    <script type="text/x-shell">
-      $ bower install
-      # ...
-      bower installing jquery#2.0.0
+    <script type="notes">
+      only latest minor version
     </script>
   </section>
 
@@ -390,27 +376,21 @@
   </section>
 
   <section>
-    <h2>just a package manager</h2>
-  </section>
-
-  <section>
-    <h4>say what you want, bower gets it</h4>
-    <script type="text/x-notes">
-      There's plenty of great build tools out there, and bower isn't
-      one of them. Bower gets what you need and its dependencies.
+    <script type="text/x-shell">
+      $ rm -r components
     </script>
   </section>
 
   <section>
-    <h4>plays well with others</h4>
-    <script type="text/x-notes">
-      As well as getting all the things, bower exposes that information to you 
-      and your build tool. That way tools like grunt can consume that information 
-      to help you concatenate and minify all of the files bower got with all of 
-      the files you write. 
+    <script type="text/x-shell">
+      $ bower install
+      # ... 
+      bower installing weather#0.2.3
+      bower installing jquery#2.0.0
     </script>
   </section>
 
+  <!-- 
   <section class="vertical">
     <h1>the origins of bower</h1> 
   </section>
@@ -441,57 +421,213 @@
     <iframe width="853" height="480" src="http://www.youtube.com/embed/E1zmfTr2d4c?start=108" frameborder="0" allowfullscreen></iframe>
     <blockquote>this grand design is no nest, it's the ultimate seduction parlour</blockquote>
   </section>
+  -->
 
-  <section>
-    <h4>&ldquo;so it's like a url shortener for js libs, then?&rdquo;</h4>
+  <section class="vertical">
+    <h2><em>just</em> a package manager</h2>
   </section>
 
-  <section>
-    <h1>NO</h1>
-  </section>
-
-  <section>
-    <h4>bower is a package <em>manager</em> &amp; dependency resolver</h4>
-  </section>
-
-
-  <section>
-    <h2>not just good for you</h2>
-  </section>
-
-  <section>
-    <h4>good for everybody</h4>
-    <p>the difficulty with not having packages maintained leads to all kinds of messes</p>
-  </section>
-
-  <section>
-    <h4>prevents old source code getting commited into projects</h4>
-    <script type="text/x-notes">
-      if you've ever had two versions of jQuery in your project you know exactly what I mean. Your 
-      &lt;script> tags shouldn't be your version control.
+  <section class="vertical-in">
+    <h4>say what you want, bower gets it</h4>
+    <script type="notes">
+      There's plenty of great build tools out there, and bower isn't
+      one of them. Bower gets what you need and its dependencies.
     </script>
   </section>
 
   <section>
-    <h4>make updating way easier so it actually happpens</h4>
+    <h4>plays well with others</h4>
+    <script type="text/x-code">
+      var bower = require('bower');
+
+      bower.install('lodash'):
+      bower.on('end', function(data) {
+        // yay
+      });
+    </script>
   </section>
 
   <section>
-    <h2>some old version of jQuery</h2>
+    <h1>sublime-bower</h1>
+    <p><a href="https://github.com/benschwarz/sublime-bower">github.com/benschwarz/sublime-bower</a></p>
+  </section>
+
+  <section>
+    <h2>bower in action v2</h2>
+    <script type="text/x-html">
+      <!doctype html>
+      <html ng-app="myApp">
+        <head>
+          <title>AngularJS + Bower = &lt;3</title>
+        </head>
+        <body>
+          <p>Sup</p>
+        </body>
+      </html>
+    </script>
+  </section>
+
+  <section>
     <script type="text/x-shell">
-      $ bower install jquery#1.8.0
+      $ bower install angular
     </script>
   </section>
 
   <section>
+    <script type="text/x-html">
+      <!doctype html>
+      <html ng-app="myApp">
+        <head>
+          <title>AngularJS + Bower = &lt;3</title>
+        </head>
+        <body>
+          <+script src="components/angular/angular.js"></+script>
+        </body>
+      </html>
+    </script>
+  </section>
+  
+  <section>
+    <script type="text/x-html">
+      <body ng-controller="MainCtrl">
+        <ul>
+          <li ng-repeat="item in list">{{item}}</li>
+        </ul>
+        <+script src="components/angular/angular.js"></+script>
+        <+script>
+          angular.module('myApp', []).
+            controller('MainCtrl', function ($scope) {
+              $scope.list = [
+                'item1',
+                'item2',
+                'item3'
+              ];
+            });
+        </+script>
+      </body>
+    </script>
+  </section>
+
+  <section class="compact-2">
     <script type="text/x-shell">
-      $ bower update jquery
-      bower installing jquery#1.8.3
+      $ bower search angular | grep markdown
+      angular-markdown-directive git://github.com/btford/angular-markdown-directive.git
+
+      $ bower install angular-markdown-directive
+      // ...
+      bower installing showdown#0.3.1
+      bower installing angular#1.0.6
+    </script>
+  </section>
+
+  <section class="compact">
+    <p>add the <code>showdown</code> dependency as well as the <code>markdown</code> javascript file</p> 
+    <script type="text/x-html">
+        <body>
+          <+script src="components/angular/angular.js"></+script>
+          <+script src="components/showdown/compressed/showdown.js"></+script>
+          <+script src="components/angular-markdown-directive/markdown.js"></+script>
+        </body>
+    </script>
+  </section>
+  
+  <section>
+    <p>add a dependency on the <code>btford.markdown</code> module</p>
+    <script type="text/x-code">
+      angular.module('myApp', ['btford.markdown']).
+        controller('MainCtrl', function ($scope) {
+          $scope.list = [
+            'item1',
+            'item2',
+            'item3'
+          ];
+        });
+    </script>   
+  </section>
+
+  <section>
+    <p>specify we want to parse item using <code>btf-markdown</code></p>
+    <script type="text/x-code">
+      <ul>
+        <li ng-repeat="item in list" btf-markdown="item">{{item}}</li>
+      </ul> 
     </script>
   </section>
 
   <section>
-    <h4>makes incoprorating other tools large and small easy to prevent rewriting them</h4>
+    <p>add some markdown</p>
+    <script type="text/x-code">
+      angular.module('myApp', ['btford.markdown']).
+        controller('MainCtrl', function ($scope) {
+          $scope.list = [
+            'item1',
+            'item2',
+            '*item3* at [Google I/O](http://google.com/io)'
+          ];
+        });
+    </script>   
+  </section>
+
+  <section>
+    <ul>
+      <li>never had to hunt down angular
+      <li>was able to find a markdown module super easy
+      <li>didn't have to hunt down showdown, which module needed
+      <li>all the scripts were in a consistent place
+    </ul>
+  </section>
+  
+  <section class="vertical">
+    <h2>looking ahead</h2>
+    <p>what's coming up in bower?</p>
+  </section>
+
+  <section>
+    <h2>hosted packages</h2>
+    <ul>
+      <li>authenticate with the registration server
+      <li>update or remove published packages
+      <li>get cached copies from the server
+      <li>publish built copies if not in your repo
+    </ul>
+  </section>
+ 
+  <section>
+    <h2>more faster</h2>
+    <p>André Cruz &amp; Marco Oliveira are heading up a rewrite of bower</p>
+    <video src="img/google_io_performance_demo.mp4" controls=true></video>
+  </section>
+
+  <section>
+    <h2>the regular stuff</h2>
+    <ul>
+      <li>more docs
+      <li>less bugs
+      <li>more packages
+      <li>more integration
+    </ul>
+  </section>
+
+  <section>
+    <h2>contributing to bower</h2>
+    <ul>
+      <li>github.com/bower
+      <li>#bower IRC channel on freenode.net
+      <li>bower google group
+    </ul>
+  </section>
+
+  <section class="vertical">
+    <br clear="all" />
+    <script type="text/x-code" class="no-line-numbers">
+      var speaker = {
+        name:    'Dan Heberden',
+        twitter: '@danheberden',
+        worksAt: 'bocoup.com',
+        github:  'danheberden'
+      };
+    </script>
+    <h3 style="clear:both; color: #2baf2b;">thanks!</h3>
   </section>
     
 
@@ -522,6 +658,7 @@
     document.write( '<script src="components/jquery/jquery.min.js"><\/script>' );
   }
 </script>
+<script src="components/socket.io-client/dist/socket.io.js"></script>
 <script src="components/codemirror/lib/codemirror.js"></script>
 <script src="components/codemirror/mode/xml/xml.js"></script>
 <script src="components/codemirror/mode/javascript/javascript.js"></script>
