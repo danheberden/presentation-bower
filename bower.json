@@ -1,6 +1,7 @@
 {
   "name": "bower-talk",
   "dependencies": {
+    "requirejs": "~2.1.5",
     "jquery": "~1.8.0",
     "codemirror": "3.13.0",
     "socket.io-client": "~0.9.11"

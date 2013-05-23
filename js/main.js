@@ -1,9 +1,26 @@
+define([
+  'jquery', 
+  'socket.io', 
+  'codemirror/lib/codemirror',
+  'codemirror/mode/xml/xml',
+  'codemirror/mode/javascript/javascript',
+  'codemirror/mode/htmlmixed/htmlmixed',
+  'plugin'
+], function($, io, CodeMirror) {
+
 /*
  * Copyright 2011 Dan Heberden
  * Dual licensed under MIT and GPL
  *
  * Don't judge me, this is a very rushed alpha of this project and it's messy, i know
  */
+
+
+Math.circularMod = function( value, mod ) {
+    value %= mod;
+    return value < 0 ? mod + value : value;
+};
+
 var socket = io.connect(location.origin + ':8001');
 function postSlide(current, next) {
   var content = "";
@@ -373,4 +390,6 @@ $( document ).ready( function() {
   socket.on('slideNext', function() {
     slides.remote('+=1');
   });
+});
+
 });
