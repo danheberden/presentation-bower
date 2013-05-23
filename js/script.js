@@ -350,6 +350,7 @@ $( document ).ready( function() {
   slides = new SlideManager( 'body > section' );
   frames.addSlides( slides );
   var console = new Console( $( '#console' ) );
+  frames.iframeOverride._console = window.console;
   frames.iframeOverride.console = console;
   var $slideCount = $( '#yasd-slide-marker' );
   slides.subscribe( 'slide:changing', function( e, slide ) {

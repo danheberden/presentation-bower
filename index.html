@@ -3,47 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-
-  <title>Bower</title>
-
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-
+  <title>Bower</title>
   <link rel="stylesheet" href="css/style.css"/>
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,70" />
 </head>
 <body>
-  
-  <section class="vertical">
-    <div style="float:left; width:40%;">
-      <img src="img/bower-logo.png" style="width:100%; margin-top: -5%;">
-    </div>
-    <div style="float:left; width:60%; font-size:.6em">
-      <h2 style="color: #ef5734;">Clientside Package Management:</h2>
-      <h2 style="font-size:2.85em; color: rgb(75, 48, 13); clear:left;">Less Work, <br>More Awesome</h2>
-    </div>
-    <br clear="all" />
-    <script type="text/x-code" class="no-line-numbers">
-      var speaker = {
-        name:    'Dan Heberden',
-        twitter: '@danheberden',
-        worksAt: 'bocoup.com',
-        github:  'danheberden'
-      };
-    </script>
-    <h3 style="clear:both; color: #2baf2b;">an introduction to bower</h3>
-  </section>
+ 
+
+<!-- SLIDES! -->
 
 
-  <section class="vertical-in compact" >
-    <script type="text/x-shell">
-      $ bower install jquery
-      bower cloning git://github.com/components/jquery.git
-      bower cached git://github.com/components/jquery.git
-      bower fetching jquery
-      bower checking out jquery#2.0.0
-      bower copying /Users/danheberden/.bower/cache/jquery/29cb...
+<section class="vertical"> <div style="float:left; width:40%;">
+    <img src="img/bower-logo.png" style="width:100%; margin-top: -5%;">
+  </div>
+  <div style="float:left; width:60%; font-size:.6em">
+    <h2 style="color: #ef5734;">Clientside Package Management:</h2>
+    <h2 style="font-size:2.85em; color: rgb(75, 48, 13); clear:left;">Less Work, <br>More Awesome</h2>
+  </div>
+  <br clear="all" />
+  <script type="text/x-code" class="no-line-numbers">
+    var speaker = {
+      name:    'Dan Heberden',
+      twitter: '@danheberden',
+      worksAt: 'bocoup.com',
+      github:  'danheberden'
+    };
+  </script>
+  <h3 style="clear:both; color: #2baf2b;">an introduction to bower</h3>
+</section>
 
-      bower installing jquery#2.0.0
+<section class="vertical-in compact" >
+  <script type="text/x-shell">
+    $ bower install jquery
+    bower cloning git://github.com/components/jquery.git
+    bower cached git://github.com/components/jquery.git
+    bower fetching jquery
+    bower checking out jquery#2.0.0
+    bower copying /Users/danheberden/.bower/cache/jquery/29cb...
+
+    bower installing jquery#2.0.0
   </script>
   <script type="notes">
     * bower at its simplest
@@ -180,6 +178,7 @@
     };
   </script>
 </section>
+
 <section>
   <h2>get our current location and run the function</h2>
 
@@ -200,8 +199,6 @@
   <h1>boom done</h1>
   <img src="img/boom-done.png" style="min-width:150%;margin-left:-25%;" />
 </section>
-
-<!-- 6 min -->
 
 <section>
   <h2>bower.json</h2>
@@ -346,318 +343,272 @@
     Since required packages don't have to be committed into the project, it's 
     easy to try a new/upgraded version of a plugin.
     </script>
-  </section>
+</section>
 
-  <section class="compact-2">
-    <h2>in fact, bower helps out with that</h2>
-    <script type="text/x-shell">
-      $ bower ls
-      bower discover Please wait while newer package versions are being discovered
-      my-weather-app
-      ├── jquery#1.8.0 (2.0.0 now available)
-      └─┬ weather#0.2.0 (0.2.3 now available)
-        └── jquery#1.8.0 (2.0.0 now available)
-    </script>
-  </section>
+<section class="compact-2">
+  <h2>in fact, bower helps out with that</h2>
+  <script type="text/x-shell">
+    $ bower ls
+    bower discover Please wait while newer package versions are being discovered
+    my-weather-app
+    ├── jquery#1.8.0 (2.0.0 now available)
+    └─┬ weather#0.2.0 (0.2.3 now available)
+      └── jquery#1.8.0 (2.0.0 now available)
+  </script>
+</section>
 
-  <section>
-    <script type="text/x-shell">
-      $ bower update jquery
-      # ...
-      bower installing jquery#1.8.3
-    </script>
-    <script type="notes">
-      only latest minor version
-    </script>
-  </section>
+<section>
+  <script type="text/x-shell">
+    $ bower update jquery
+    # ...
+    bower installing jquery#1.8.3
+  </script>
+  <script type="notes">
+    only latest minor version
+  </script>
+</section>
 
-  <section>
-    <h2>the power of <code>bower.json</code></h2>
-  </section>
+<section>
+  <h2>the power of <code>bower.json</code></h2>
+</section>
 
-  <section>
-    <script type="text/x-shell">
-      $ rm -r components
-    </script>
-  </section>
+<section>
+  <script type="text/x-shell">
+    $ rm -r components
+  </script>
+</section>
 
-  <section>
-    <script type="text/x-shell">
-      $ bower install
-      # ... 
-      bower installing weather#0.2.3
-      bower installing jquery#2.0.0
-    </script>
-  </section>
+<section>
+  <script type="text/x-shell">
+    $ bower install
+    # ... 
+    bower installing weather#0.2.3
+    bower installing jquery#2.0.0
+  </script>
+</section>
 
-  <!-- 
-  <section class="vertical">
-    <h1>the origins of bower</h1> 
-  </section>
-     
-  <section>
-    <h2>declaring client-side hardship</h2>
-    <ul>
-       <li>managing dependencies
-       <li>sharing components across different code bases
-       <li>reducing the barrier of entry to use a library, to prevent wheel making
-    </ul>
-  </section>
+<section class="vertical">
+  <h2><em>just</em> a package manager</h2>
+</section>
 
-   <section>
-     <h2>but why the bird?</h2>
-     <script type="notes">pi is literally obsetted witih david ottenborough</script>
-   </section>
+<section class="vertical-in">
+  <h4>say what you want, bower gets it</h4>
+  <script type="notes">
+    There's plenty of great build tools out there, and bower isn't
+    one of them. Bower gets what you need and its dependencies.
+  </script>
+</section>
 
-   <section>
-    <img src="http://paulirish.com/i/824330.png" style="min-height:80%;">
-   </section>
+<section>
+  <h4>plays well with others</h4>
+  <script type="text/x-code">
+    var bower = require('bower');
 
-   <section>
-    <img src="http://danheberden.com/share/590f.png" style="min-height:60%;">
-   </section>
+    bower.install('lodash'):
+    bower.on('end', function(data) {
+      // yay
+    });
+  </script>
+</section>
 
-  <section>
-    <iframe width="853" height="480" src="http://www.youtube.com/embed/E1zmfTr2d4c?start=108" frameborder="0" allowfullscreen></iframe>
-    <blockquote>this grand design is no nest, it's the ultimate seduction parlour</blockquote>
-  </section>
-  -->
+<section>
+  <h1>sublime-bower</h1>
+  <p><a href="https://github.com/benschwarz/sublime-bower">github.com/benschwarz/sublime-bower</a></p>
+</section>
 
-  <section class="vertical">
-    <h2><em>just</em> a package manager</h2>
-  </section>
-
-  <section class="vertical-in">
-    <h4>say what you want, bower gets it</h4>
-    <script type="notes">
-      There's plenty of great build tools out there, and bower isn't
-      one of them. Bower gets what you need and its dependencies.
-    </script>
-  </section>
-
-  <section>
-    <h4>plays well with others</h4>
-    <script type="text/x-code">
-      var bower = require('bower');
-
-      bower.install('lodash'):
-      bower.on('end', function(data) {
-        // yay
-      });
-    </script>
-  </section>
-
-  <section>
-    <h1>sublime-bower</h1>
-    <p><a href="https://github.com/benschwarz/sublime-bower">github.com/benschwarz/sublime-bower</a></p>
-  </section>
-
-  <section>
-    <h2>bower in action v2</h2>
-    <script type="text/x-html">
-      <!doctype html>
-      <html ng-app="myApp">
-        <head>
-          <title>AngularJS + Bower = &lt;3</title>
-        </head>
-        <body>
-          <p>Sup</p>
-        </body>
-      </html>
-    </script>
-  </section>
-
-  <section>
-    <script type="text/x-shell">
-      $ bower install angular
-    </script>
-  </section>
-
-  <section>
-    <script type="text/x-html">
-      <!doctype html>
-      <html ng-app="myApp">
-        <head>
-          <title>AngularJS + Bower = &lt;3</title>
-        </head>
-        <body>
-          <+script src="components/angular/angular.js"></+script>
-        </body>
-      </html>
-    </script>
-  </section>
-  
-  <section>
-    <script type="text/x-html">
-      <body ng-controller="MainCtrl">
-        <ul>
-          <li ng-repeat="item in list">{{item}}</li>
-        </ul>
-        <+script src="components/angular/angular.js"></+script>
-        <+script>
-          angular.module('myApp', []).
-            controller('MainCtrl', function ($scope) {
-              $scope.list = [
-                'item1',
-                'item2',
-                'item3'
-              ];
-            });
-        </+script>
+<section>
+  <h2>bower in action v2</h2>
+  <script type="text/x-html">
+    <!doctype html>
+    <html ng-app="myApp">
+      <head>
+        <title>AngularJS + Bower = &lt;3</title>
+      </head>
+      <body>
+        <p>Sup</p>
       </body>
-    </script>
-  </section>
+    </html>
+  </script>
+</section>
 
-  <section class="compact-2">
-    <script type="text/x-shell">
-      $ bower search angular | grep markdown
-      angular-markdown-directive git://github.com/btford/angular-markdown-directive.git
+<section>
+  <script type="text/x-shell">
+    $ bower install angular
+  </script>
+</section>
 
-      $ bower install angular-markdown-directive
-      // ...
-      bower installing showdown#0.3.1
-      bower installing angular#1.0.6
-    </script>
-  </section>
+<section>
+  <script type="text/x-html">
+    <!doctype html>
+    <html ng-app="myApp">
+      <head>
+        <title>AngularJS + Bower = &lt;3</title>
+      </head>
+      <body>
+        <+script src="components/angular/angular.js"></+script>
+      </body>
+    </html>
+  </script>
+</section>
 
-  <section class="compact">
-    <p>add the <code>showdown</code> dependency as well as the <code>markdown</code> javascript file</p> 
-    <script type="text/x-html">
-        <body>
-          <+script src="components/angular/angular.js"></+script>
-          <+script src="components/showdown/compressed/showdown.js"></+script>
-          <+script src="components/angular-markdown-directive/markdown.js"></+script>
-        </body>
-    </script>
-  </section>
-  
-  <section>
-    <p>add a dependency on the <code>btford.markdown</code> module</p>
-    <script type="text/x-code">
-      angular.module('myApp', ['btford.markdown']).
-        controller('MainCtrl', function ($scope) {
-          $scope.list = [
-            'item1',
-            'item2',
-            'item3'
-          ];
-        });
-    </script>   
-  </section>
-
-  <section>
-    <p>specify we want to parse item using <code>btf-markdown</code></p>
-    <script type="text/x-code">
+<section>
+  <script type="text/x-html">
+    <body ng-controller="MainCtrl">
       <ul>
-        <li ng-repeat="item in list" btf-markdown="item">{{item}}</li>
-      </ul> 
-    </script>
-  </section>
+        <li ng-repeat="item in list">{{item}}</li>
+      </ul>
+      <+script src="components/angular/angular.js"></+script>
+      <+script>
+        angular.module('myApp', []).
+          controller('MainCtrl', function ($scope) {
+            $scope.list = [
+              'item1',
+              'item2',
+              'item3'
+            ];
+          });
+      </+script>
+    </body>
+  </script>
+</section>
 
-  <section>
-    <p>add some markdown</p>
-    <script type="text/x-code">
-      angular.module('myApp', ['btford.markdown']).
-        controller('MainCtrl', function ($scope) {
-          $scope.list = [
-            'item1',
-            'item2',
-            '*item3* at [Google I/O](http://google.com/io)'
-          ];
-        });
-    </script>   
-  </section>
+<section class="compact-2">
+  <script type="text/x-shell">
+    $ bower search angular | grep markdown
+    angular-markdown-directive git://github.com/btford/angular-markdown-directive.git
 
-  <section>
+    $ bower install angular-markdown-directive
+    // ...
+    bower installing showdown#0.3.1
+    bower installing angular#1.0.6
+  </script>
+</section>
+
+<section class="compact">
+  <p>add the <code>showdown</code> dependency as well as the <code>markdown</code> javascript file</p> 
+  <script type="text/x-html">
+      <body>
+        <+script src="components/angular/angular.js"></+script>
+        <+script src="components/showdown/compressed/showdown.js"></+script>
+        <+script src="components/angular-markdown-directive/markdown.js"></+script>
+      </body>
+  </script>
+</section>
+
+<section>
+  <p>add a dependency on the <code>btford.markdown</code> module</p>
+  <script type="text/x-code">
+    angular.module('myApp', ['btford.markdown']).
+      controller('MainCtrl', function ($scope) {
+        $scope.list = [
+          'item1',
+          'item2',
+          'item3'
+        ];
+      });
+  </script>   
+</section>
+
+<section>
+  <p>specify we want to parse item using <code>btf-markdown</code></p>
+  <script type="text/x-code">
     <ul>
-      <li>never had to hunt down angular
-      <li>was able to find a markdown module super easy
-      <li>didn't have to hunt down showdown, which module needed
-      <li>all the scripts were in a consistent place
-    </ul>
-  </section>
+      <li ng-repeat="item in list" btf-markdown="item">{{item}}</li>
+    </ul> 
+  </script>
+</section>
+
+<section>
+  <p>add some markdown</p>
+  <script type="text/x-code">
+    angular.module('myApp', ['btford.markdown']).
+      controller('MainCtrl', function ($scope) {
+        $scope.list = [
+          'item1',
+          'item2',
+          '*item3* at [Google I/O](http://google.com/io)'
+        ];
+      });
+  </script>   
+</section>
+
+<section>
+  <ul>
+    <li>never had to hunt down angular
+    <li>was able to find a markdown module super easy
+    <li>didn't have to hunt down showdown, which module needed
+    <li>all the scripts were in a consistent place
+  </ul>
+</section>
+
+<section class="vertical">
+  <h2>looking ahead</h2>
+  <p>what's coming up in bower?</p>
+</section>
+
+<section>
+  <h2>hosted packages</h2>
+  <ul>
+    <li>authenticate with the registration server
+    <li>update or remove published packages
+    <li>get cached copies from the server
+    <li>publish built copies if not in your repo
+  </ul>
+</section>
+
+<section>
+  <h2>more faster</h2>
+  <p>André Cruz &amp; Marco Oliveira are heading up a rewrite of bower</p>
+  <video src="img/google_io_performance_demo.mp4" controls=true></video>
+</section>
+
+<section>
+  <h2>the regular stuff</h2>
+  <ul>
+    <li>more docs
+    <li>less bugs
+    <li>more packages
+    <li>more integration
+  </ul>
+</section>
+
+<section>
+  <h2>contributing to bower</h2>
+  <ul>
+    <li>github.com/bower
+    <li>#bower IRC channel on freenode.net
+    <li>bower google group
+  </ul>
+</section>
+
+<section class="vertical">
+  <br clear="all" />
+  <script type="text/x-code" class="no-line-numbers">
+    var speaker = {
+      name:    'Dan Heberden',
+      twitter: '@danheberden',
+      worksAt: 'bocoup.com',
+      github:  'danheberden',
+      talkAt:  '//github.com/danheberden/presentation-bower'
+    };
+  </script>
+  <h3 style="clear:both; color: #2baf2b;">thanks!</h3>
+</section>
   
-  <section class="vertical">
-    <h2>looking ahead</h2>
-    <p>what's coming up in bower?</p>
-  </section>
 
-  <section>
-    <h2>hosted packages</h2>
-    <ul>
-      <li>authenticate with the registration server
-      <li>update or remove published packages
-      <li>get cached copies from the server
-      <li>publish built copies if not in your repo
-    </ul>
-  </section>
- 
-  <section>
-    <h2>more faster</h2>
-    <p>André Cruz &amp; Marco Oliveira are heading up a rewrite of bower</p>
-    <video src="img/google_io_performance_demo.mp4" controls=true></video>
-  </section>
+<div id="yasd-slide-marker"></div>
+<div id="console"></div>
 
-  <section>
-    <h2>the regular stuff</h2>
-    <ul>
-      <li>more docs
-      <li>less bugs
-      <li>more packages
-      <li>more integration
-    </ul>
-  </section>
+<div id="clouds">
+  <div class="cloud x1"></div>
+  <!-- Time for multiple clouds to dance around -->
+  <div class="cloud x2"></div>
+  <div class="cloud x3"></div>
+  <div class="cloud x4"></div>
+  <div class="cloud x5"></div>
+</div>
 
-  <section>
-    <h2>contributing to bower</h2>
-    <ul>
-      <li>github.com/bower
-      <li>#bower IRC channel on freenode.net
-      <li>bower google group
-    </ul>
-  </section>
-
-  <section class="vertical">
-    <br clear="all" />
-    <script type="text/x-code" class="no-line-numbers">
-      var speaker = {
-        name:    'Dan Heberden',
-        twitter: '@danheberden',
-        worksAt: 'bocoup.com',
-        github:  'danheberden'
-      };
-    </script>
-    <h3 style="clear:both; color: #2baf2b;">thanks!</h3>
-  </section>
-    
-
-  <div id="yasd-slide-marker"></div>
-  <div id="console"></div>
-
-  <div id="clouds">
-    <div class="cloud x1"></div>
-    <!-- Time for multiple clouds to dance around -->
-    <div class="cloud x2"></div>
-    <div class="cloud x3"></div>
-    <div class="cloud x4"></div>
-    <div class="cloud x5"></div>
-  </div>
-<script>
-  (function(){
-    var verMatch = /jqversion=([\d\w\.]+)/.exec( location.search ),
-        version = verMatch && verMatch[1],
-        src;
-    if ( version ) {
-      src = '//code.jquery.com/jquery-' + version;
-      document.write( '<script src="//' + src + '.js"><\/script>' );
-    }
-  })();
-</script>
-<script>
-  if ( !window.jQuery ) {
-    document.write( '<script src="components/jquery/jquery.min.js"><\/script>' );
-  }
-</script>
+<script src="components/jquery/jquery.min.js"></script>
 <script src="components/socket.io-client/dist/socket.io.js"></script>
 <script src="components/codemirror/lib/codemirror.js"></script>
 <script src="components/codemirror/mode/xml/xml.js"></script>

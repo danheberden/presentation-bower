@@ -1,0 +1,21 @@
+{
+  "name": "presentation-bower",
+  "version": "0.1.0",
+  "description": "Bower presentation for googleIO",
+  "main": "index.html",
+  "dependencies": {
+    "socket.io": "~0.9.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danheberden/presentation-bower.git"
+  },
+  "author": "Dan Heberden",
+  "license": "MIT",
+  "readmeFilename": "Readme.md",
+  "gitHead": "e48c45340ecbd1fbb0f75baec91002bbea257178"
+}
