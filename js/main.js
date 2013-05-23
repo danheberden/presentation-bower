@@ -27,7 +27,7 @@ function postSlide(current, next) {
   if (!current || !current.jquery) {
     content += "NOT FOUND";
   } else {
-    var currentNotes = current.find('script[type="notes"]').each(function() {
+    current.find('script[type="notes"]').each(function() {
       content += '<div class="notes">' + $(this).html().replace(/\\n/g, '<br><br>') + '</div>';
     });
   }
@@ -49,7 +49,7 @@ function postSlide(current, next) {
   }
 
   socket.emit('post', content);  
-};
+}
 
 
 $.fn.yasd = function( method ){
@@ -62,11 +62,13 @@ $.fn.yasd = function( method ){
       el.yasd( method );
     }
   });
-}
+};
 
-var Console = function( $el ){ this.el = $el; };
+var Console = function(el){ 
+  this.el = el; 
+};
 Console.prototype = {
-  log: function(a ) {
+  log: function() {
     var args = [].slice.call( arguments ),
 				i = 0;
 			for(; i < args.length; i++) {
@@ -94,7 +96,7 @@ Console.prototype = {
 
 var FrameManager = function(){ 
   return this.init( ); 
-}
+};
 FrameManager.prototype = {
   init: function( ) {
 
@@ -134,7 +136,7 @@ FrameManager.prototype = {
   // how many slides are being transitioned/loaded/whatever
   transitioning: 0,
 
-  clear: function( frame, id ) {
+  clear: function( frame ) {
     // save if for later
     var dfd = $.Deferred(),
         slides = this.slides,
@@ -145,7 +147,7 @@ FrameManager.prototype = {
     frame[0].src = frame[0].src;
 
     // we just reset src, so no pending load events will ever fire
-    if ( oldDfd && !oldDfd.state() == 'resolved' ) {
+    if ( oldDfd && oldDfd.dfd && oldDfd.state() === 'resolved' ) {
       oldDfd.dfd.reject();
     }
 
@@ -166,17 +168,16 @@ FrameManager.prototype = {
 
   // handle loading and showing a new slide
   load: function( slide ) {
-    var frames = this.frames,
-        iframes = this.iframes,
-        dfd = $.Deferred(),
-        _this = this,
-        lastSlide = _this.lastSlide || { id: 0 },
-        animateDirection = lastSlide.id >= slide.id ? 'next' : 'previous',
-        animateOpposite = animateDirection == 'next' ? 'previous' : 'next',
-        sameSlide = lastSlide.id == slide.id, 
-        next = iframes[ +!iframes.currentFrame ],
-        current = iframes [ +iframes.currentFrame ],
-        slides = this.slides;
+    var iframes = this.iframes;
+    var dfd = $.Deferred();
+    var _this = this;
+    var lastSlide = _this.lastSlide || { id: 0 };
+    var animateDirection = lastSlide.id >= slide.id ? 'next' : 'previous';
+    var animateOpposite = animateDirection === 'next' ? 'previous' : 'next';
+    var sameSlide = lastSlide.id === slide.id;
+    var next = iframes[ +!iframes.currentFrame ];
+    var current = iframes [ +iframes.currentFrame ];
+    var slides = this.slides;
 
     // we've requested a new slide
     this.transitioning++;
@@ -186,7 +187,7 @@ FrameManager.prototype = {
 
     // when our new frame is all ready to go
     $.when( this.clear( next, slide.id ) )
-      .done( function( frame ) {
+      .done( function() {
 
         // run any slide teardown code
         current.yasd( 'teardown' );
@@ -201,7 +202,7 @@ FrameManager.prototype = {
         $( next[0].contentWindow.document.body ).append( '<section class="'+slide.slide.prop('className')+'">' + slide.slide.html() + '</section>' );
  
         // publish the next slide's content to remote listeners
-        var upcoming = _this.slides.slides[_this.slides.currentSlide + 1];
+        var upcoming = slides.slides[_this.slides.currentSlide + 1];
         postSlide(slide.slide, upcoming ? upcoming.slide : undefined);
 
 
@@ -227,7 +228,7 @@ FrameManager.prototype = {
         next.prop('className', [animateOpposite, slide.slide.prop('className')].join(' '));
         current.removeClass( 'animate' );
         // apply the move real quick
-        document.body.offsetWidth;
+        document.body.offsetWidth = document.body.offsetWidth;
 
         // don't animate?
         if ( sameSlide || _this.transitioning > 1 ) {
@@ -266,10 +267,10 @@ FrameManager.prototype = {
   console: function() { 
     
   }
-}
-var frames = new FrameManager;
+};
+var frames = new FrameManager();
 
-var SlideManager = function( sel ){ return this.init( sel ); }
+var SlideManager = function( sel ){ return this.init( sel ); };
 SlideManager.prototype = {
   currentSlide: undefined,
   init: function( sel ) {
@@ -279,7 +280,7 @@ SlideManager.prototype = {
     // liiiiiinked list
     var slides = this.slides = [];
     // parse our linked list
-    slideElements.each( function( i, v ){
+    slideElements.each( function( i ){
       var $slide = $( this );
       slides.push({
         slide: $slide,
@@ -317,16 +318,16 @@ SlideManager.prototype = {
     }
 
     // actions (just call with correct slide #)
-    var targetSlide = action == 'next' ? '+=1' :
-                      action == 'prev' ? '-=1' :
-                      action == 'end' ? this.slides.length -1 :
+    var targetSlide = action === 'next' ? '+=1' :
+                      action === 'prev' ? '-=1' :
+                      action === 'end' ? this.slides.length -1 :
                       0;
 
     // support +=X or -=X slide adjustement
     if ( !targetSlide ) {
       var plusOrMinus = /^(\+|\-)=(\d+)$/.exec ( action );
       if ( plusOrMinus && plusOrMinus[2] ) {
-        targetSlide = +( plusOrMinus[1] + plusOrMinus[2] ) + +this.currentSlide;
+        targetSlide = Number( plusOrMinus[1] + plusOrMinus[2] ) + Number(this.currentSlide);
       }
     }
     return this.remote( targetSlide );
@@ -360,7 +361,7 @@ SlideManager.prototype = {
     }
   }
 
-}
+};
 var slides;
 
 $( document ).ready( function() {
@@ -374,10 +375,10 @@ $( document ).ready( function() {
     $slideCount.html( slide.id );
   });
   $( document ).key( slides.keys );
-  var $window = $( window ).bind( 'hashchange', function( e ) {
+  var $window = $( window ).bind( 'hashchange', function() {
     var fragment = $.param.fragment();
     // no slide specified
-		if ( fragment == '' ) {
+    if ( fragment === '' ) {
       slides.goto( 0 );
     } else {
       slides.goto( +fragment );
