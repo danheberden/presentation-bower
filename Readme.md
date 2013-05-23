@@ -1,3 +1,13 @@
 [bower](http://bower.io) is an awesome client-side package manager
 
-don't forget to `bower install`. use ← and → to navigate slides. 
+```
+bower install
+npm install
+grunt preview # to load files individually 
+grunt preview-live # to load concatenated/minified file
+```
+
+use ← and → to navigate slides. 
+
+
+
